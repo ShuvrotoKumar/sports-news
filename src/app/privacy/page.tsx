@@ -2,7 +2,29 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.4, 0, 0.2, 1]
+    }
+  }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 import { useEffect, useState } from 'react';
 import { FaShieldAlt, FaLock, FaUserShield, FaInfoCircle } from 'react-icons/fa';
 
@@ -13,17 +35,21 @@ export default function PrivacyPolicy() {
     setIsVisible(true);
   }, []);
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
+  const fadeInUp: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20 
+    },
+    visible: (i: number = 0) => ({
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: [0.4, 0, 0.2, 1],
+        delay: i * 0.1
       }
-    }
-  };
+    })
+  } as const;
 
   const staggerContainer = {
     visible: {

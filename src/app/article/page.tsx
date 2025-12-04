@@ -250,12 +250,16 @@ const ArticlePage = () => {
                   return (
                     <figure key={index} className="my-10">
                       <div className="relative w-full h-80 md:h-96 rounded-lg overflow-hidden">
-                        <Image
-                          src={item.src}
-                          alt=""
-                          fill
-                          className="object-cover"
-                        />
+                        {item.src && (
+                          <Image
+                            src={item.src as string}
+                            alt={item.caption || ''}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            priority
+                          />
+                        )}
                       </div>
                       <figcaption className="mt-3 text-sm text-center text-gray-500">
                         {item.caption}
